@@ -17,12 +17,13 @@ const getTodoById =(req,res) => {
 }
 
 const createTodo = (req,res) => {
-    const {name, done} = req.body;
+    const {name, done, language} = req.body;
     pool.query(query.checkTodoIfExists, [name], (err,results)=>{
         if(results.rows.length){
             res.send("Todo already exists.");
+            return;
         }
-    pool.query(query.createTodo, [name,done], (err, results) => {
+    pool.query(query.createTodo, [name,done,language], (err, results) => {
         if (err) throw err;
         res.status(201).send("successfully added todo");
     });
@@ -43,9 +44,14 @@ const deleteTodo = (req,res) => {
     });
 }
 
+const updateTodo = (req,res) =>{
+
+}
+
 module.exports = {
     getTodos,
     getTodoById,
     createTodo,
-    deleteTodo
+    deleteTodo,
+    updateTodo
 }
