@@ -25,16 +25,10 @@ const signup = async(req,res) => {
 }
 
 const login = (req, res) => {
-    const {email, password} = req.body;
-    pool.query(query.login, [email], async (err, results) => {
+    const {email} = req.body;
+    pool.query(query.login, [email], (err, results) => {
         if(!results.rows.length){
             res.send("User doesn't exists");
-        }
-        if(await bcrypt.compare(password, results.rows[0].password)){
-            let userId = (results.rows[0].uid).toString();
-            res.send({message:'You are successfully logged in', userId});
-        }else{
-            res.send({message:'Invalid password', userId:''});
         }
     });
 }
