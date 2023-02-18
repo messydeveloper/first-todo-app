@@ -2,7 +2,7 @@ const {Router} = require('express');
 const controller = require('./controller');
 const passport = require('passport');
 const pool = require('../../db');
-const logQuery = require('./log_queries');
+const logQuery = require('../../log_queries');
 
 const router = Router();
 
