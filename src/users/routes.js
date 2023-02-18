@@ -24,6 +24,7 @@ router.post('/signup', controller.signup);
 
 router.post('/login', auth(), (req, res)=>{
     let date = new Date();
+    let userInfo = req.session.passport.user;
     res.status(200).json({
         "id":req.user.id, 
         "user": req.body.email, 
@@ -31,7 +32,7 @@ router.post('/login', auth(), (req, res)=>{
         "sessionID":req.sessionID,
         "role":req.user.role
     });
-    pool.query(logQuery.sendLoginDate, [req.session.passport.user.id, req.body.email, date.toLocaleString()]);
+    pool.query(logQuery.sendLoginDate, [userInfo.id, req.body.email, date.toLocaleString(), userInfo.role]);
 });
 
 router.post('/logout', (req, res) => {
