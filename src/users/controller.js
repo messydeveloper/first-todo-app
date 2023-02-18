@@ -10,6 +10,13 @@ const getAllUsers = (req,res) => {
     })
 }
 
+const getAllUsersWithLogs = (req,res) => {
+    pool.query(query.getAllUsersWithLogs, (err,results) =>{
+        if (err) throw err;
+        res.status(200).json(results.rows);
+    })
+}
+
 const signup = async(req,res) => {
     const {email, password, role} = req.body;
     const hashedPassword = await bcrypt.hashSync(password, 10);
@@ -36,5 +43,6 @@ const login = (req, res) => {
 module.exports = {
     getAllUsers,
     signup,
-    login
+    login,
+    getAllUsersWithLogs
 }

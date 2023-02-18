@@ -19,7 +19,7 @@ const auth = () => {
 }
 
 
-router.get('/', controller.getAllUsers);
+router.get('/', controller.getAllUsersWithLogs);
 router.post('/signup', controller.signup);
 
 router.post('/login', auth(), (req, res)=>{
@@ -31,7 +31,7 @@ router.post('/login', auth(), (req, res)=>{
         "sessionID":req.sessionID,
         "role":req.user.role
     });
-    pool.query(logQuery.sendLoginDate, [req.session.passport.user.id, req.body.email, date.toLocaleDateString()]);
+    pool.query(logQuery.sendLoginDate, [req.session.passport.user.id, req.body.email, date.toLocaleString()]);
 });
 
 router.post('/logout', (req, res) => {
