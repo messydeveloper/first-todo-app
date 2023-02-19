@@ -21,6 +21,7 @@ const signup = async(req,res) => {
     const {email, password, role} = req.body;
     const hashedPassword = await bcrypt.hashSync(password, 10);
         pool.query(query.checkEmailIfExist,[email], (err,results) => {
+            console.log(results);
             if(results.rows.length){
                 res.send("email already exists.");
                 return;
