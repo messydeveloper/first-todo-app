@@ -16,13 +16,12 @@ const cors = require('cors');
 
 var corsOptions = {
     credentials:true,
-    origin: "https://translate-todo.appspot.com",
-    methods: "GET, PUT, POST, DELETE"
+    origin: "https://translate-todo.appspot.com"
 }
 
 app.use(cors(corsOptions));
 
-app.options('*', cors(corsOptions));
+app.options('*', cors());
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
