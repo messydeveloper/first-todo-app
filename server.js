@@ -19,7 +19,7 @@ var corsOptions = {
     origin: "https://translate-todo.appspot.com"
 }
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
