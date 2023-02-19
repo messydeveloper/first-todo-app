@@ -1,7 +1,6 @@
 const LocalStrategy = require('passport-local').Strategy;
 const pool = require('./db');
 const bcrypt = require('bcrypt');
-const passport = require('passport');
 const {checkEmailIfExist} = require('./src/users/queries');
 
 
@@ -16,7 +15,6 @@ module.exports = function(passport){
                 }
             //match password
             if(await bcrypt.compare(password, results.rows[0].password)){
-                console.log('db', results.rows);
                 return done(null, results.rows[0]);
 
             }else{

@@ -39,7 +39,7 @@ app.use(session({
     resave:false,
     saveUninitialized:true,
     withCredentials:true,
-    cookie:{secure:false}
+    cookie:{secure:true}
     // session:true
 }))
 
