@@ -15,8 +15,7 @@ require('./passport')(passport);
 const cors = require('cors');
 var corsOptions = {
     credentials:true,
-    origin: "http://localhost:4200",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE"
+    origin: "https://translate-todo.ts.r.appspot.com"
 }
 
 app.use(cors(corsOptions));
