@@ -11,10 +11,11 @@ const auth = () => {
     return (req,res,next) => {
         passport.authenticate('local', (error,user,info) => {
             if(error) res.status(400).json({"statusCode": 200, "message":"error"});
-            req.login(user, (error) => {
-                if(error) return next(error);
-                next();
-            })
+            // req.login(user, (error) => {
+            //     if(error) return next(error);
+            //     next();
+            // })
+            next();
         })(req,res,next);
     }
 }
