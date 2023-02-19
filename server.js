@@ -18,10 +18,16 @@ var corsOptions = {
     credentials:true,
     origin: "https://translate-todo.appspot.com",
     allowedHeaders:['Content-Type', 'Authorization'],
-    methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
-    preflightContinue: true,
-    optionsSuccessStatus: 204
+    methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
 }
+app.use(function(req, res, next) {
+    // handle OPTIONS method
+    if ('OPTIONS' == req.method) {
+        return res.sendStatus(200);
+    } else {
+        next();
+    }
+});
 
 app.use(cors(corsOptions));
 
