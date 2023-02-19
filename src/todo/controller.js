@@ -14,6 +14,7 @@ const updateUserLogs = async (userID) => {
 const getUserSession = async(sessID) => {
     try{
         const res = await pool.query(query.getUserSession, [sessID]);
+        console.log('getUserSession', res.rows);
         return res.rows[0].sess;
     }catch(e){
         return e.stack;
@@ -21,9 +22,10 @@ const getUserSession = async(sessID) => {
 }
 
 const getTodos= async (req,res) => {
+    console.log(req.sessionID);
     const userInfo = await getUserSession(req.sessionID);
     console.log(userInfo);
-    pool.query(query.getTodos,[userInfo.passport.user.id], (err,results) =>{
+    pool.query(query.getTodos, [userInfo.passport.user.id], (err,results) =>{
         if (err) throw err;
         res.status(200).json(results.rows);
     });
