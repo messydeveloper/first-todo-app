@@ -19,14 +19,16 @@ const getAllUsersWithLogs = (req,res) => {
 
 const signup = async(req,res) => {
     const {email, password, role} = req.body;
-    const hashedPassword = await bcrypt.hashSync(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10, (err,hash) => {
+        return hash;
+    });
         pool.query(query.checkEmailIfExist,[email], (err,results) => {
             console.log(results);
             if(results.rows.length){
                 res.send("email already exists.");
                 return;
             }
-            pool.query(query.signup, [email,hashedPassword,role], (err,results) =>{
+            pool.query(query.signup, [email, hashedPassword,role], (err,results) =>{
                 res.status(201).send("Successfully registered");
             });
         });
