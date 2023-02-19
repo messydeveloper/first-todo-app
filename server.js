@@ -49,7 +49,7 @@ app.use(session({
     saveUninitialized:true,
     withCredentials:true,
     cookie:{
-        secure:false,
+        secure:true,
     }
 }));
 
