@@ -30,6 +30,9 @@ app.options('*', cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
+// cookie parser middleware
+app.use(cookieParser());
+
 app.get('/', (req,res)=>{
     res.send("Hello world!");
 });
