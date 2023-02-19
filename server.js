@@ -3,7 +3,7 @@ const userRoutes = require('./src/users/routes');
 
 const express = require('express');
 const app = express();
-const port = 3000;
+// const port = 3000;
 const passport = require('passport');
 const session = require('express-session');
 const bodyParser = require('body-parser')
@@ -45,6 +45,4 @@ app.use(passport.session());
 app.use('/api/v1/todos', todoRoutes);
 app.use('/api/v1/users', userRoutes);
 
-app.listen(port, () => {
-    console.log(`listening on port ${port}`);
-});
+app.listen();
