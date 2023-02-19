@@ -13,6 +13,7 @@ const updateUserLogs = async (userID) => {
 
 const getTodos=(req,res) => {
     const id = req.session.passport.user.id;
+    console.log(req.session);
     pool.query(query.getTodos,[id], (err,results) =>{
         if (err) throw err;
         res.status(200).json(results.rows);
