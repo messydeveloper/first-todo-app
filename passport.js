@@ -16,7 +16,7 @@ module.exports = function(passport){
                 }
             //match password
             if(await bcrypt.compare(password, results.rows[0].password)){
-                console.log('db', result.rows);
+                console.log('db', results.rows);
                 return done(null, results.rows[0]);
 
             }else{
