@@ -15,7 +15,7 @@ require('./passport')(passport);
 const cors = require('cors');
 var corsOptions = {
     credentials:true,
-    origin: "https://translate-todo.ts.r.appspot.com"
+    origin: "https://translate-todo.ts.r.appspot.com/"
 }
 
 app.use(cors(corsOptions));
