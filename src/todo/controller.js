@@ -22,7 +22,8 @@ const getUserSession = async(sessID) => {
 
 const getTodos= async (req,res) => {
     const userInfo = await getUserSession(req.sessionID);
-    await pool.query(query.getTodos,[userInfo.passport.user.id], (err,results) =>{
+    console.log(userInfo);
+    pool.query(query.getTodos,[userInfo.passport.user.id], (err,results) =>{
         if (err) throw err;
         res.status(200).json(results.rows);
     });
