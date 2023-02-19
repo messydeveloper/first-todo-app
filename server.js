@@ -39,9 +39,9 @@ app.use(session({
     secret:'secret',
     resave:false,
     saveUninitialized:true,
-    // withCredentials:true,
-    cookie:{secure:true}
-    // session:true
+    withCredentials:true,
+    cookie:{secure:true},
+    session:true
 }));
 
 
