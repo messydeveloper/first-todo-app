@@ -45,8 +45,8 @@ app.use(session({
         pool:pool
       }),
     secret:'secret',
-    resave:true,
-    saveUninitialized:true,
+    resave:false,
+    saveUninitialized:false,
     withCredentials:true,
     cookie:{
         secure:true,
