@@ -22,7 +22,7 @@ const getUserSession = async(sessID) => {
 }
 
 const getTodos= async (req,res) => {
-    const userInfo = await getUserSession(req.sessionID.toString());
+    const userInfo = await getUserSession(req.sessionID);
     console.log(userInfo);
     pool.query(query.getTodos, [userInfo.passport.user.id], (err,results) =>{
         if (err) throw err;
