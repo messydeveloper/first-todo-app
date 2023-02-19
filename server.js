@@ -33,18 +33,18 @@ app.get('/', (req,res)=>{
     res.send("Hello world!");
 });
 
-
+app.set('trust proxy',1);
 //Express session
 app.use(session({
     secret:'secret',
     resave:false,
     saveUninitialized:true,
     withCredentials:true,
-    cookie:{secure:false}
+    cookie:{secure:true}
     // session:true
 }));
 
-app.enable('trust proxy');
+
 
 
 //Passport middleware
