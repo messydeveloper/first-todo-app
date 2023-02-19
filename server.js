@@ -31,8 +31,7 @@ app.options('*', cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
-// cookie parser middleware
-app.use(cookieParser());
+
 
 app.get('/', (req,res)=>{
     res.send("Hello world!");
@@ -42,6 +41,9 @@ app.get('/', (req,res)=>{
 if (process.env.NODE_ENV='production') {
     app.set('trust proxy', 1) // trust first proxy
 }
+
+// cookie parser middleware
+app.use(cookieParser());
 
 //Express session
 app.use(session({
