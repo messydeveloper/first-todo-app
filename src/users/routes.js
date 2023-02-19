@@ -40,6 +40,7 @@ router.post('/logout', (req, res) => {
     req.logOut((err) => {
         console.log(err)
     });
+    console.log('logout',req.sessionID);
     pool.query(query.deleteSession, [req.sessionID], (err,res)=>{
         if(err) throw err;
     })
