@@ -14,6 +14,7 @@ const updateUserLogs = async (userID) => {
 const getUserSession = async(sessID) => {
     try{
         const res = await pool.query(query.getUserSession, [sessID]);
+        console.log('getUserSession',res.rows);
         return res.rows[0].sess;
     }catch(e){
         return e.stack;
