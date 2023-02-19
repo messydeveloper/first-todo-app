@@ -1,25 +1,14 @@
 const pg = require('pg');
-const {Client, Pool} = require('pg');
-const pgSession = require('connect-pg-simple');
+const {Client} = require('pg');
 
-const pool = new Pool({
+const pool = new Client({
     connectionString: process.env.DATABASE_URL,
     ssl: {
       rejectUnauthorized: false
     }
   });
-
-const sessionHandler = (session) => {
-    const pgs = pgSession(session);
-    return new pgs({
-        conString: process.env.DATABASE_URL,
-        pool: pool,
-        schemaName: process.env.DB,
-        tableName: 'session',
-      });
-}
   
-// pool.connect();
+pool.connect();
 // const pool = new pg.Pool({
 //     user: process.env.DB_USER,
 //     host:process.env.DB_HOST,
@@ -28,4 +17,4 @@ const sessionHandler = (session) => {
 //     port:process.env.DB_PORT
 // });
 
-module.exports = sessionHandler;
+module.exports = pool;

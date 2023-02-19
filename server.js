@@ -7,7 +7,6 @@ const app = express();
 const passport = require('passport');
 const session = require('express-session');
 const bodyParser = require('body-parser');
-const pgSession = require('./db');
 
 // Passport Config
 require('./passport')(passport);
@@ -41,7 +40,6 @@ if (process.env.NODE_ENV='production') {
 
 //Express session
 app.use(session({
-    store:pgSession(session),
     secret:'secret',
     resave:false,
     saveUninitialized:true,
@@ -55,8 +53,8 @@ app.use(session({
 
 
 //Passport middleware
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/api/v1/todos', todoRoutes);
 app.use('/api/v1/users', userRoutes);
