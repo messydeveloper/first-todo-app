@@ -14,10 +14,14 @@ require('./passport')(passport);
 
 const cors = require('cors');
 
-app.use(cors({
-    origin:"https://translate-todo.appspot.com",
-    credentials:true
-}));
+var corsOptions = {
+    credentials:true,
+    origin: "https://translate-todo.appspot.com"
+}
+
+app.use(cors(corsOptions));
+
+app.options('*', cors(corsOptions));
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
@@ -42,9 +46,6 @@ app.use(passport.session());
 
 app.use('/api/v1/todos', todoRoutes);
 app.use('/api/v1/users', userRoutes);
-
-app.options('*', cors());
-
 
 app.listen(process.env.PORT, () => {
     console.log(`listening on port: ${process.env.PORT}`)
