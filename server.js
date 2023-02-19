@@ -6,7 +6,8 @@ const app = express();
 // const port = 3000;
 const passport = require('passport');
 const session = require('express-session');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const pgSession = require('./db');
 
 // Passport Config
 require('./passport')(passport);
@@ -40,15 +41,13 @@ if (process.env.NODE_ENV='production') {
 
 //Express session
 app.use(session({
+    store:pgSession(session),
     secret:'secret',
     resave:false,
     saveUninitialized:true,
     withCredentials:true,
     cookie:{
         secure:true,
-        sameSite:true,
-        domain:'https://translate-todo.ts.r.appspot.com/',
-        httpOnly:true
     }
 }));
 
