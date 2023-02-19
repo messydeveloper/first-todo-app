@@ -26,13 +26,11 @@ module.exports = function(passport){
         })
     );
     passport.serializeUser((user,done) =>{
-        console.log('serialize', user);
         done(null, user);
     })
     
     passport.deserializeUser((user, done) => {
         pool.query("SELECT * FROM users WHERE id = $1", [user.id], (err, res) => {
-            done(err, res.rows[0]);
         })
     })
 }
