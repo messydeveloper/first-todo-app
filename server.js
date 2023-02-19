@@ -16,9 +16,7 @@ const cors = require('cors');
 
 var corsOptions = {
     credentials:true,
-    origin: "https://translate-todo.appspot.com",
-    allowedHeaders:['Content-Type', 'Authorization'],
-    methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
+    origin: "https://translate-todo.appspot.com"
 }
 
 app.use(cors(corsOptions));
