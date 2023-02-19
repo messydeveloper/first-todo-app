@@ -45,7 +45,7 @@ app.use(session({
     saveUninitialized:true,
     withCredentials:true,
     cookie:{
-        secure:true,
+        secure:false,
     }
 }));
 
