@@ -11,10 +11,18 @@ const updateUserLogs = async (userID) => {
     }
 }
 
-const getTodos=(req,res) => {
-    console.log(req.sessionID);
-    const id = req.session.passport.user.id;
-    pool.query(query.getTodos,[id], (err,results) =>{
+const getUserSession = async(sessID) => {
+    try{
+        const res = await pool.query(query.getUserSession, [sessID]);
+        return res.rows[0].sess;
+    }catch(e){
+        return e.stack;
+    }
+}
+
+const getTodos= async (req,res) => {
+    const userInfo = await getUserSession(req.sessionID);
+    pool.query(query.getTodos,[userInfo.passport.user.id], (err,results) =>{
         if (err) throw err;
         res.status(200).json(results.rows);
     });
@@ -47,8 +55,8 @@ const createTodo = async (req,res) => {
 
 const deleteTodo = async (req,res) => {
     const todoId = +req.params.id;
-    const {id} = req.session.passport.user;
-    let {deleted_todos} = await updateUserLogs(id);
+    let userInfo = await getUserSession(req.sessionID);
+    let {deleted_todos} = await updateUserLogs(userInfo.passport.user.id);
     pool.query(query.getTodoById, [todoId], (err, results) => {
       const noTodoFound = !results.rows.length;
       if(noTodoFound){
@@ -59,19 +67,19 @@ const deleteTodo = async (req,res) => {
         res.status(200).send("successfully removed todo");
       });
     });
-    pool.query(logQuery.logDeleteTodo, [deleted_todos + 1, id]);
+    pool.query(logQuery.logDeleteTodo, [deleted_todos + 1, userInfo.passport.user.id]);
 }
 
 const updateTodo = async (req,res) =>{
     const todoId = +req.params.id;
     const {name, done, language} = req.body;
-    const {id} = req.session.passport.user;
-    let {translated_todos} = await updateUserLogs(id);
+    const userInfo = await getUserSession(req.sessionID);
+    let {translated_todos} = await updateUserLogs(userInfo.passport.user.id);
     pool.query(query.updateTodo, [name,done,language,todoId], (err,results)=>{
         if (err) throw err;
         res.status(200).send("successfully updated todo");
     })
-    pool.query(logQuery.logUpdateTodo, [translated_todos + 1, id]);
+    pool.query(logQuery.logUpdateTodo, [translated_todos + 1, userInfo.passport.user.id]);
 }
 
 module.exports = {

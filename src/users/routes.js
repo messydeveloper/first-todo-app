@@ -2,6 +2,7 @@ const {Router} = require('express');
 const controller = require('./controller');
 const passport = require('passport');
 const pool = require('../../db');
+const query = require('./queries');
 const logQuery = require('../../log_queries');
 
 const router = Router();
@@ -39,6 +40,9 @@ router.post('/logout', (req, res) => {
     req.logOut((err) => {
         console.log(err)
     });
+    pool.query(query.deleteSession, [req.sessionID], (err,res)=>{
+        if(err) throw err;
+    })
     req.session.destroy();
     res.send({message:"successfully logged out"});
   });
