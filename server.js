@@ -15,7 +15,8 @@ require('./passport')(passport);
 const cors = require('cors');
 var corsOptions = {
     credentials:true,
-    origin: "http://localhost:4200"
+    origin: "http://localhost:4200",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE"
 }
 
 app.use(cors(corsOptions));
