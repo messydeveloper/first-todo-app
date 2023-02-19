@@ -20,19 +20,8 @@ var corsOptions = {
     allowedHeaders:['Content-Type', 'Authorization'],
     methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
 }
-app.use(function(req, res, next) {
-    // handle OPTIONS method
-    if ('OPTIONS' == req.method) {
-        return res.sendStatus(200);
-    } else {
-        next();
-    }
-});
 
 app.use(cors(corsOptions));
-
-
-app.options('*', cors(corsOptions));
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
@@ -57,6 +46,8 @@ app.use(passport.session());
 
 app.use('/api/v1/todos', todoRoutes);
 app.use('/api/v1/users', userRoutes);
+
+app.options('*', cors());
 
 
 app.listen(process.env.PORT, () => {
