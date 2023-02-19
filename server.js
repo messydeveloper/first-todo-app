@@ -8,6 +8,7 @@ const passport = require('passport');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const pool = require('./db');
+const cookieParser = require('cookie-parser');
 
 // Passport Config
 require('./passport')(passport);
