@@ -33,15 +33,23 @@ app.get('/', (req,res)=>{
     res.send("Hello world!");
 });
 
-app.set('trust proxy',1);
+
+if (process.env.NODE_ENV='production') {
+    app.set('trust proxy', 1) // trust first proxy
+}
+
 //Express session
 app.use(session({
     secret:'secret',
     resave:false,
     saveUninitialized:true,
     withCredentials:true,
-    cookie:{secure:true},
-    session:true
+    cookie:{
+        secure:true,
+        sameSite:true,
+        domain:'https://translate-todo.ts.r.appspot.com/',
+        httpOnly:true
+    }
 }));
 
 
