@@ -1,4 +1,4 @@
-const getUserSession = "SELECT * FROM session WHERE sid = '$1'";
+const getUserSession = "SELECT * FROM session WHERE sid = $1";
 const getTodos ="SELECT * FROM todos WHERE uid = $1";
 const getTodoById = "SELECT * FROM todos WHERE id = $1";
 const checkTodoIfExists = "SELECT t FROM todos t WHERE t.name = $1 AND uid = $2";
