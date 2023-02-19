@@ -44,6 +44,4 @@ app.use(passport.session());
 app.use('/api/v1/todos', todoRoutes);
 app.use('/api/v1/users', userRoutes);
 
-// app.listen(port, () => {
-//     console.log(`listening on port: ${port}`);
-// });
+app.listen();
