@@ -16,6 +16,7 @@ module.exports = function(passport){
                 }
             //match password
             if(await bcrypt.compare(password, results.rows[0].password)){
+                console.log('db', result.rows);
                 return done(null, results.rows[0]);
 
             }else{
@@ -25,6 +26,7 @@ module.exports = function(passport){
         })
     );
     passport.serializeUser((user,done) =>{
+        console.log('serialize', user);
         done(null, user);
     })
     
