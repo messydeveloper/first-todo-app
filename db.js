@@ -1,5 +1,5 @@
-const pg = require('pg');
-const {Client} = require('pg');
+// const pg = require('pg');
+const {Client, Pool} = require('pg');
 
 const pool = new Client({
     connectionString: process.env.DATABASE_URL,
@@ -9,12 +9,16 @@ const pool = new Client({
   });
   
 pool.connect();
-// const pool = new pg.Pool({
-//     user: process.env.DB_USER,
-//     host:process.env.DB_HOST,
-//     database:process.env.DB,
-//     password:process.env.DB_PW,
-//     port:process.env.DB_PORT
+// const pool = new Pool({
+    // user: process.env.DB_USER,
+    // host:process.env.DB_HOST,
+    // database:process.env.DB,
+    // password:process.env.DB_PW,
+    // port:process.env.DB_PORT
+    // user:'postgres',
+    // host:'localhost',
+    // database:'todoapp',
+    // port:5432
 // });
 
 module.exports = pool;

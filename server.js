@@ -7,6 +7,7 @@ const app = express();
 const passport = require('passport');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const pool = require('./db');
 
 // Passport Config
 require('./passport')(passport);
@@ -40,6 +41,9 @@ if (process.env.NODE_ENV='production') {
 
 //Express session
 app.use(session({
+    store:new (require('connect-pg-simple')(session))({
+        pool:pool
+      }),
     secret:'secret',
     resave:false,
     saveUninitialized:true,
