@@ -15,14 +15,14 @@ require('./passport')(passport);
 const cors = require('cors');
 
 var corsOptions = {
+    credentials:true,
     origin: "https://translate-todo.appspot.com",
     methods: "GET, PUT, POST, DELETE"
-    // credentials:true,
 }
 
 app.use(cors(corsOptions));
 
-app.options('*', cors());
+app.options('*', cors(corsOptions));
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
