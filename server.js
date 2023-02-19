@@ -16,7 +16,7 @@ const cors = require('cors');
 
 var corsOptions = {
     credentials:true,
-    origin: "*",
+    origin: "https://translate-todo.ts.r.appspot.com",
     methods: "GET, PUT, POST, DELETE"
 }
 
