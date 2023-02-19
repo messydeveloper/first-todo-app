@@ -19,11 +19,8 @@ const getAllUsersWithLogs = (req,res) => {
 
 const signup = async(req,res) => {
     const {email, password, role} = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10, (err,hash) => {
-        return hash;
-    });
+    const hashedPassword = await bcrypt.hash(password, 10);
         pool.query(query.checkEmailIfExist,[email], (err,results) => {
-            console.log(results);
             if(results.rows.length){
                 res.send("email already exists.");
                 return;
